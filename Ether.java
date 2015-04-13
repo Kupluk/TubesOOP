@@ -10,7 +10,7 @@
  */
 public class Ether extends Item{
     public Ether(){
-        super(10);
+        super(40); //HARGA 40
     }
        
     @Override
