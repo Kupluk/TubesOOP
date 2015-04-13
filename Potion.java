@@ -1,10 +1,14 @@
 public class Potion extends Item{
+    //potion tambah HP 50 
     
     //konstruktor
-    public Potion(int h){
-        super(h);
+    public Potion(){
+        super(10); //harga potion 10
     }
-    
-    //method
-    
+
+    @Override
+    public void efekItem(Karakter k) {
+        k.setHP(k.getHP()+50);
+    }
+   
 }
