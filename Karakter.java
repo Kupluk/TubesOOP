@@ -16,15 +16,17 @@
 
 public class Karakter
 {
-	private String nama;
-	private String job;
-	private int str;
-	private int vit;
-	private int intel;
-	private int lvl;
-	private int hp;
-	private int mp;
-	private int dmg;
+	protected String nama;
+	protected String job;
+	protected int str;
+	protected int vit;
+	protected int intel;
+	protected int lvl;
+	protected int hp;
+	protected int mp;
+	protected int dmg;
+	protected int exp;
+
 
 	//===GETTER DAN SETTER===
 	public String getNama()
@@ -130,5 +132,35 @@ public class Karakter
 		hp = 10*vit;
 		mp = 10*intel;
 		dmg = 2*str;
+	}
+
+	//Menyerang monster
+	public void attack(Monster m)
+	{
+		Random rand = new Random(); //Konstruktor objek random
+		int randomNum = rand.nextInt((dmg +20) - (dmg-10)) + (dmg-10); //41 = max, 1 = min
+		if (randomNum <= 0)
+		{
+			randomNum = 0;
+		}
+		m.setHP(m.getHP() - randomNum);
+		System.out.println(m.getNama() + " took " + randomNum + " damage !");
+	}
+
+	//Cetak status karakter
+	public void printStatus()
+	{
+		System.out.println(nama + "'s status : ");
+		System.out.println("HP 		: " + hp);
+		System.out.println("MP 		: " + mp);
+		System.out.println("Level	: " + lvl);
+
+	}
+
+	//Karakter mati, kehabisan HP
+	public void death()
+	{
+		hp = 0;
+		System.out.println(nama + " has fallen !");
 	}
 }
