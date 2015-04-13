@@ -5,7 +5,7 @@
 //	-Minimal ada 3 item.
 //	-Buatlah item yang memiliki kegunaan yang unik.
 
-public class Item {
+public abstract class Item {
     private int harga;
     
     //konstruktor
@@ -25,4 +25,8 @@ public class Item {
     public void setHarga(int h){
         harga=h;
     }
+    
+    //method
+    public abstract void efekItem(Karakter k);
+    
 }
