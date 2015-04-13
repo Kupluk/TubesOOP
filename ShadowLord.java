@@ -7,4 +7,7 @@ public class ShadowLord extends Monster {
 		System.out.println("ShadowLord telah muncul di arena");		
     }
     
+    public void run() {
+    	//Monster akan kabur ketika mencapai HP minimal
+    }
 }
