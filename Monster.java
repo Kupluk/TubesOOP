@@ -1,6 +1,6 @@
 /* 
 MONSTER
-a. Nama		: Nama monster
+a. Nama		: Nilaiama monster
 b. ATK		: Damage monster kepada karakter
 c. HP		: Health Point, "darahnya"
 d. Posisi	: Posisi monster di arena
@@ -12,13 +12,15 @@ Tambahan :
 -Pendetilan dari kelas monster digunakan prinsip inheritance, sama contohnya dengan karakter.
 */
 
+import java.util.Random;
+
 public class Monster {
-    private String nama;
-    private int atk;
-    private int hp;
-    private int posmonster;
-    private int money;
-    private int inclevel;
+    protected String nama;
+    protected int atk;
+    protected int hp;
+    protected int posmonster;
+    protected int money;
+    protected int inclevel;
         
     //METHOD
     //========Getter========
@@ -73,6 +75,44 @@ public class Monster {
 		posmonster = pm;
 		money = m;
 		inclevel = il;
+		System.out.println(nama + " appears !");
+    }
+
+    //Mencetak status monster
+    public void printStatus()
+    {
+    	System.out.println("===MONSTER STATUS===");
+    	System.out.println("[" + nama + "]");
+		System.out.println("HP\t: " + hp);   
+		System.out.println(""); 	
+    }
+
+
+    //Menyerang karakter
+    public void attack(Karakter k)
+    {
+    	System.out.println(nama + " attacks !");
+    	Random rand = new Random(); //Konstruktor objek random
+		int randomNum = rand.nextInt(99) + 1;
+		if (randomNum >= (50+(Math.round(k.agi/5))))
+		{
+			randomNum = rand.nextInt((atk + 5) - (atk-5)) + (atk-5);
+			if(k.def == true)
+			{
+				System.out.println(k.nama + " blocked the attack !");
+				randomNum = randomNum - k.str;
+			}
+			if (randomNum <= 0)
+			{
+				randomNum = 0;
+			}
+			k.setHP(k.getHP() - randomNum);
+			System.out.println(k.nama + " took " + randomNum + " damage !");
+		}
+		else
+		{
+			System.out.println(nama + "'s attack was missed !");
+		}
     }
     
 }
