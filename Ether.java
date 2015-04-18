@@ -1,21 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Irfans
- */
 public class Ether extends Item{
+    
+//konstruktor
     public Ether(){
-        super(40); //HARGA 40
+        super(40, 2); //HARGA ETHER 40, dan id ether 2
     }
-       
-    @Override
+    
+    //method
     public void efekItem(Karakter k) {
-        k.setMP(k.getMP()+40);
+        k.setMP(k.getMP()+40); //menambahkan MP sebanyak 40
     }
     
     
