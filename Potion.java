@@ -3,10 +3,10 @@ public class Potion extends Item{
     
     //konstruktor
     public Potion(){
-        super(10); //harga potion 10
+        super(10, 1); //harga potion 10
     }
+    
 
-    @Override
     public void efekItem(Karakter k) {
         k.setHP(k.getHP()+50);
     }
