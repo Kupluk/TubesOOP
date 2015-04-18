@@ -1,0 +1,119 @@
+
+public class TileMap {
+    private Tile[][] map = new Tile[11][11]; //ini yang 10 kali 10, di dalem tile tuh char, pake tile biar fleksibel, siapa tau ntar pas GUI ga pake char lagi.
+    private char[][] board= new char[22][42]; //ini yang buat di layar (pas GUI berarti ga di pake)
+    
+    //konstruktor
+    public TileMap(){
+        int i, j ;
+        Tile tile = new Tile(' ');
+        //algoritma
+        //inisiasi map
+        for(i=1;i<=10;i++){
+            for(j=1;j<=10;j++){
+                map[i][j]=tile;
+            }
+        }
+        
+        for(i=1;i<=21;i++){
+            for(j=1;j<=41;j++){
+                if(i%2==1){
+                  board[i][j]='-';  
+                }else if (j%4==1){
+                    board[i][j]='|';
+                }else{
+                    board[i][j]=' ';
+                }
+                if ((i%2==1)&&(j%4==1)){
+                    board[i][j]='+';
+                }
+            }
+        }  
+    }
+    
+    //getter
+    public Tile[][] getMap(){
+        return map;
+    }
+    
+    //setter
+    public void setMap(Tile[][] m){
+        map=m;
+    }
+    public void setMap(Pemain p){ //belum sempurna, disini tuh niatnya buat ngeset si monster, item, sama pemain berada
+        Point point = new Point(10,1);
+        setTile(point, '1');
+        point.setY(2);
+        setTile(point, '2');
+        point.setY(3);
+        setTile(point, '3');
+        point.setY(4);
+        setTile(point, '4');
+        point.setY(5);
+        setTile(point, '5');        
+        setTile(p.getPosisi(), 'p');//buat ngeset si pemain
+    }
+    
+    //METHOD
+    //buat ngeprint map, tapi cuma 10 kali 10 (ga kepake)
+    public void printMap(){
+        int i, j ;
+        //algoritma
+        for(i=1;i<=10;i++){
+            for(j=1;j<=10;j++){
+                if (j==10){
+                    System.out.println(map[i][j].getLambang());
+                }else{
+                    System.out.print(map[i][j].getLambang());
+                }          
+            }
+        }        
+    }
+    
+    //melakukan konversi dari 10x10 ke ukuran board yang di layar
+    public Point mapToBoard(int x, int y){
+        int x2, y2;
+        x2=3+(4*(x-1));
+        y2=2+(2*(y-1));
+        Point p = new Point(x2, y2);
+        return p;
+    }
+    
+    //Mengisi matriks board yang diambil dari matriks map
+    public void setBoard(){
+        int i,j;
+        for(i=1;i<=10;i++){
+            for(j=1;j<=10;j++){
+                Point p = mapToBoard(j, i);
+                board[p.getY()][p.getX()]=map[i][j].getLambang();
+            }
+        }
+    }
+    
+    //print board
+    public void printBoard(){
+        int i, j ;
+        //algoritma
+        for(i=1;i<=21;i++){
+            for(j=1;j<=41;j++){
+                if (j==41){
+                    System.out.println(board[i][j]);
+                }else{
+                    System.out.print(board[i][j]);
+                }         
+            }
+        }  
+    }
+    
+    //mengisi lambang(char) tile pada point tertentu 
+    public void setTile(Point p, char c){
+        Tile t= new Tile();
+        t.setLambang(c);
+        map[p.getY()][p.getX()]=t;
+    }
+    
+    //melakukan pengecekan apakah pada board sudah terisi oleh toko, monster, atau item
+    public boolean isIsi(Point p){
+        return (map[p.getY()][p.getX()].getLambang()) != ' ';
+    }
+}
