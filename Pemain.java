@@ -7,14 +7,14 @@
 
 public class Pemain {
     private int money;
-    private Slot[] tas= new Slot[100]; //asumsi ada sebuah tas yang dapat menyimpan 100 slot item
-    private Point posisi;
+    private Tas tas;
+    private Point posisi; //posisinya dia
     private Karakter[] characters= new Karakter[3]; //ada 3 karakter yang bisa dimainkan
     
     //konstruktor
     public Pemain(){
     }
-    public Pemain(int m, Slot[] t, Point p, Karakter[] c){
+    public Pemain(int m, Tas t, Point p, Karakter[] c){
         money=m;
         tas=t;
         posisi=p;
@@ -25,7 +25,7 @@ public class Pemain {
     public int getMoney(){
         return money;
     }
-    public Slot[] getTas(){
+    public Tas getTas(){
         return tas;
     }
     public Point getPosisi(){
@@ -34,12 +34,18 @@ public class Pemain {
     public Karakter[] getCharacters(){
         return characters;
     }
+    public int getX(){
+        return posisi.getX();
+    }
+    public int getY(){
+        return posisi.getY();
+    }
     
     //setter
     public void setMoney(int m){
         money=m;
     }
-    public void setTas(Slot[] t){
+    public void setTas(Tas t){
         tas=t;
     }
     public void setPosisi(Point p){
@@ -47,6 +53,76 @@ public class Pemain {
     }
     public void setCharacters(Karakter[] c){
         characters=c;
+    }
+    public void setX(int x){
+        posisi.setX(x);
+    }
+    public void setY(int y){
+        posisi.setY(y);
+    }
+    
+    //method
+    
+    //menggerakan pemain maju kanan kiri mundur
+    public void maju(char c, TileMap tm){
+        tm.setTile(posisi, ' ');
+        switch (c){
+            case 'w' :
+                setY(getY()-1);
+                break;
+            case 's' :
+                setY(getY()+1);
+                break;
+            case 'd' :
+                setX(getX()+1);
+                break;
+            case 'a' :
+                setX(getX()-1);
+                break;
+            default :
+                System.out.println("tombol salah");
+                break;
+        }
+        if (tm.isIsi(posisi)){
+            aksi();//belum
+        }
+        tm.setMap(this);
+        tm.setBoard();
+    }
+    
+    //aksi pemain saat memasuki suatu tile
+    public void aksi(){
+        
+    }
+
+    //membeli sebuah item
+    public void buy(Item item){
+        this.setMoney(this.getMoney()-item.gerHarga());
+        tas.addBarang(item);
+    }
+    
+    //menggunakan sebuah item untuk sebuah karakter
+    public void useItem(Item item, Karakter karakter){
+        tas.kurangBarang(item);
+        item.efekItem(karakter);
+    }
+    
+    //mencetak kelayar item apa saja yang dimiliki
+    public void printItemDimiliki(){
+        int i;
+        System.out.println("====Barang dimiliki====");
+        for(i=1;i<=tas.getNeff();i++){
+            System.out.println("Id barang : "+ tas.getIsiTas()[i].getBarang().getIdItem());
+            System.out.println("Jumlah barang : "+ tas.getIsiTas()[i].getKuantitas());
+        }
+    }
+    
+    //mencetak ke layar semua atribut pemain
+    public void printPemain(){
+        System.out.println("\n====PEMAIN====");
+        System.out.println("Money : "+getMoney());
+        System.out.println("Posisi : "+getPosisi().getX()+","+getPosisi().getY());
+        printItemDimiliki();
     }
     
 }
