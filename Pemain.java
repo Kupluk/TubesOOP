@@ -97,8 +97,16 @@ public class Pemain {
 
     //membeli sebuah item
     public void buy(Item item){
-        this.setMoney(this.getMoney()-item.gerHarga());
-        tas.addBarang(item);
+        try{
+            if((getMoney()-item.gerHarga())>=0){
+                this.setMoney(this.getMoney()-item.gerHarga());
+                tas.addBarang(item);
+            }else{
+                throw new Exception("Ga ada duit cuk!");
+            } 
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     
     //menggunakan sebuah item untuk sebuah karakter
