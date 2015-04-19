@@ -118,10 +118,16 @@ public class Pemain {
         }
     }
     
+    //Use item
     //menggunakan sebuah item untuk sebuah karakter
     public void useItem(Item item, Karakter karakter){
         tas.kurangBarang(item);
         item.efekItem(karakter);
+    }
+    //menggunakan sebuah item untuk sebuah monster
+    public void useItem(Item item, Monster monster){
+        tas.kurangBarang(item);
+        item.efekItem(monster);
     }
     
     //mencetak kelayar item apa saja yang dimiliki
