@@ -101,8 +101,9 @@ public class Pemain {
             if((getMoney()-item.gerHarga())>=0){
                 this.setMoney(this.getMoney()-item.gerHarga());
                 tas.addBarang(item);
+                System.out.println("Barang berhasil dibeli");
             }else{
-                throw new Exception("Ga ada duit cuk!");
+                throw new Exception("Duit ga cukup cuk!");
             } 
         }catch(Exception e){
             System.out.println(e.getMessage());
