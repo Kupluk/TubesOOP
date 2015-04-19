@@ -39,4 +39,6 @@ public class Item {
     //memberikan efek dari item ke karakter yang dipilih
     public void efekItem(Karakter k){   
     }
+    public void efekItem(Monster m){
+    }
 }
