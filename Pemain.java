@@ -65,29 +65,37 @@ public class Pemain {
     
     //menggerakan pemain maju kanan kiri mundur
     public void maju(char c, TileMap tm){
-        tm.setTile(posisi, ' ');
-        switch (c){
-            case 'w' :
-                setY(getY()-1);
-                break;
-            case 's' :
-                setY(getY()+1);
-                break;
-            case 'd' :
-                setX(getX()+1);
-                break;
-            case 'a' :
-                setX(getX()-1);
-                break;
-            default :
-                System.out.println("tombol salah");
-                break;
+        int x=getX();
+        int y=getY();
+        try{
+            tm.setTile(posisi, ' ');
+            switch (c){
+                case 'w' :
+                    setY(getY()-1);
+                    break;
+                case 's' :
+                    setY(getY()+1);
+                    break;
+                case 'd' :
+                    setX(getX()+1);
+                    break;
+                case 'a' :
+                    setX(getX()-1);
+                    break;
+                default :
+                    System.out.println("tombol salah");
+                    break;
+            }
+            if (tm.isIsi(posisi)){
+                aksi();//belum
+            }
+            tm.setMap(this);
+            tm.setBoard();
+        }catch(Exception e1){ //kalo keluar dari matriks
+            System.out.println("keluar");
+            setX(x);
+            setY(y);
         }
-        if (tm.isIsi(posisi)){
-            aksi();//belum
-        }
-        tm.setMap(this);
-        tm.setBoard();
     }
     
     //aksi pemain saat memasuki suatu tile
