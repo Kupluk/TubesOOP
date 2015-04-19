@@ -58,7 +58,7 @@ public class Tas {
     }
     
     //Mengurangi sebuah item pada tas
-    public void kurangBarang(Item item){
+    public void kurangBarang(Item item) throws Exception{
         int i=1;
         while(i<=getNeff()){
             if(getIsiTas()[i].getBarang().getIdItem()==item.getIdItem()){
@@ -72,6 +72,9 @@ public class Tas {
                 }
             }
             i++;
+        }
+        if(i>=getNeff()){
+            throw new Exception("Barang ga ada");
         }
     }
 }
