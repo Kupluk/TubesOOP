@@ -121,13 +121,22 @@ public class Pemain {
     //Use item
     //menggunakan sebuah item untuk sebuah karakter
     public void useItem(Item item, Karakter karakter){
-        tas.kurangBarang(item);
-        item.efekItem(karakter);
+        try {
+            tas.kurangBarang(item);
+            item.efekItem(karakter);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     //menggunakan sebuah item untuk sebuah monster
     public void useItem(Item item, Monster monster){
-        tas.kurangBarang(item);
-        item.efekItem(monster);
+        try {
+            tas.kurangBarang(item);
+            item.efekItem(monster);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        
     }
     
     //mencetak kelayar item apa saja yang dimiliki
